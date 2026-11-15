@@ -35,17 +35,7 @@ a{color:#FFD60A}a:hover{color:#FFFFFF}
 <body>
 <div style="position: relative; overflow: hidden; background-color: #3A0D87; background-image: radial-gradient(rgba(255,255,255,0.09) 1.5px, transparent 1.5px); background-size: 22px 22px; color: #FFFFFF; font-family: 'Inter', system-ui, sans-serif">
 
-<div id="gate" style="position: fixed; inset: 0; z-index: 50; box-sizing: border-box; padding: 24px; background-color: #3A0D87; background-image: radial-gradient(rgba(255,255,255,0.09) 1.5px, transparent 1.5px); background-size: 22px 22px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 22px; text-align: center">
-<img src="perfil.jpg" alt="" style="width: 132px; height: 132px; box-sizing: border-box; border-radius: 50%; border: 5px solid #FFFFFF; background: #FFFFFF; box-shadow: 8px 8px 0 #FFD60A">
-<div style="font-family: 'Anton', Impact, sans-serif; font-size: clamp(54px, 14vw, 96px); line-height: 0.95; text-transform: uppercase; color: #FFFFFF; text-shadow: 4px 4px 0 #E10600, 8px 8px 0 #0B0B0F"><span style="display: block; font-size: 0.34em; letter-spacing: 0.3em; color: #FFD60A; text-shadow: 3px 3px 0 #0B0B0F; margin-bottom: 8px">MC</span>Mestre Jota</div>
-<button class="mj-cta" type="button" id="enter-sound" style="display: flex; align-items: center; justify-content: center; gap: 12px; width: min(360px, 100%); min-height: 68px; margin-top: 10px; padding: 14px 22px; background: #FFD60A; border: 3px solid #FFFFFF; border-radius: 16px; box-shadow: 7px 7px 0 #E10600; color: #0B0B0F; cursor: pointer; font-family: 'Anton', Impact, sans-serif; font-size: 24px; letter-spacing: 0.05em; text-transform: uppercase">
-<svg aria-hidden="true" viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#0B0B0F" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.5 H7.5 L12.5 5.5 V18.5 L7.5 14.5 H4 Z" fill="#0B0B0F"></path><path d="M16 9 C17.6 10.6 17.6 13.4 16 15"></path><path d="M18.6 6.5 C21.6 9.5 21.6 14.5 18.6 17.5"></path></svg>
-<span>Entrar com o beat</span>
-</button>
-<button type="button" id="enter-silent" style="min-height: 44px; padding: 10px 18px; background: transparent; border: 2px solid #FFFFFF; border-radius: 999px; color: #FFFFFF; cursor: pointer; font-family: 'Inter', system-ui, sans-serif; font-size: 15px; font-weight: 700">Entrar sem som</button>
-</div>
-
-<button type="button" id="sound" hidden aria-label="Ligar o beat" style="position: fixed; right: 16px; bottom: 16px; z-index: 40; width: 60px; height: 60px; padding: 0; border-radius: 50%; background: #FFD60A; border: 3px solid #0B0B0F; box-shadow: 4px 4px 0 #E10600; cursor: pointer; display: flex; align-items: center; justify-content: center">
+<button type="button" id="sound" aria-label="Ligar o beat" style="position: fixed; right: 16px; bottom: 16px; z-index: 40; width: 60px; height: 60px; padding: 0; border-radius: 50%; background: #FFD60A; border: 3px solid #0B0B0F; box-shadow: 4px 4px 0 #E10600; cursor: pointer; display: flex; align-items: center; justify-content: center">
 <svg id="ico-on" hidden aria-hidden="true" viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#0B0B0F" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.5 H7.5 L12.5 5.5 V18.5 L7.5 14.5 H4 Z" fill="#0B0B0F"></path><path d="M16 9 C17.6 10.6 17.6 13.4 16 15"></path><path d="M18.6 6.5 C21.6 9.5 21.6 14.5 18.6 17.5"></path></svg>
 <svg id="ico-off" aria-hidden="true" viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#0B0B0F" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.5 H7.5 L12.5 5.5 V18.5 L7.5 14.5 H4 Z" fill="#0B0B0F"></path><path d="M16.5 9.5 L21.5 14.5 M21.5 9.5 L16.5 14.5"></path></svg>
 </button>
@@ -138,15 +128,17 @@ a{color:#FFD60A}a:hover{color:#FFFFFF}
 </div>
 <script>
 (function(){
-var audio=null,playing=false;
-var gate=document.getElementById('gate'),btn=document.getElementById('sound'),on=document.getElementById('ico-on'),off=document.getElementById('ico-off');
-function get(){if(!audio){audio=new Audio('beat.mp3');audio.loop=true;audio.volume=0.7;}return audio;}
-function set(p){playing=p;if(p){var r=get().play();if(r&&r.catch)r.catch(function(){});}else if(audio){audio.pause();}
-on.hidden=!p;off.hidden=p;btn.setAttribute('aria-label',p?'Desligar o beat':'Ligar o beat');}
-function enter(p){gate.hidden=true;btn.hidden=false;set(p);}
-document.getElementById('enter-sound').addEventListener('click',function(){enter(true);});
-document.getElementById('enter-silent').addEventListener('click',function(){enter(false);});
-btn.addEventListener('click',function(){set(!playing);});
+var audio=new Audio('beat.mp3');audio.loop=true;audio.volume=0.7;
+var playing=false,wanted=true;
+var btn=document.getElementById('sound'),on=document.getElementById('ico-on'),off=document.getElementById('ico-off');
+function show(p){playing=p;on.hidden=!p;off.hidden=p;btn.setAttribute('aria-label',p?'Desligar o beat':'Ligar o beat');}
+function start(){if(!wanted)return;var r=audio.play();if(r&&r.then){r.then(function(){show(true);unbind();}).catch(function(){});}}
+var evs=['pointerdown','touchend','click','keydown'];
+function first(e){if(btn.contains(e.target))return;start();}
+function unbind(){evs.forEach(function(n){document.removeEventListener(n,first,true);});}
+evs.forEach(function(n){document.addEventListener(n,first,true);});
+btn.addEventListener('click',function(){unbind();if(playing){wanted=false;audio.pause();show(false);}else{wanted=true;var r=audio.play();if(r&&r.then){r.then(function(){show(true);}).catch(function(){});}}});
+start();
 })();
 </script>
 </body>
