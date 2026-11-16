@@ -23,6 +23,11 @@ a{color:#FFD60A}a:hover{color:#FFFFFF}
 .mj-ripple{animation:mj-ripple 3.2s ease-out infinite}
 @keyframes mj-spin{to{transform:rotate(360deg)}}
 .mj-spin{animation:mj-spin 7s linear infinite}
+.mj-vinyl{-webkit-mask-image:url(vinil-mask.png);mask-image:url(vinil-mask.png);-webkit-mask-size:100% 100%;mask-size:100% 100%}
+@keyframes mj-bolt{0%,100%{opacity:0}6%{opacity:.95}10%{opacity:.15}14%{opacity:.8}22%{opacity:0}48%{opacity:0}52%{opacity:.7}57%{opacity:.05}63%{opacity:1}70%{opacity:.2}78%{opacity:0}}
+.mj-bolt{opacity:0;animation:mj-bolt 2.3s linear infinite}
+@keyframes mj-twinkle{0%,100%{opacity:0}50%{opacity:.85}}
+.mj-twinkle{opacity:0;animation:mj-twinkle 3.4s ease-in-out infinite}
 .mj-rise{animation:mj-rise .7s ease-out both}
 .mj-track{animation:mj-marquee 26s linear infinite}
 .mj-cta{animation:mj-pulse 2.4s ease-in-out infinite;transition:transform .15s ease}
@@ -30,7 +35,7 @@ a{color:#FFD60A}a:hover{color:#FFFFFF}
 .mj-link{transition:transform .15s ease,box-shadow .15s ease}
 .mj-link:hover{transform:translate(-4px,-4px);box-shadow:8px 8px 0 #FFD60A}
 .mj-link:focus-visible,.mj-cta:focus-visible{outline:3px solid #FFFFFF;outline-offset:4px}
-@media (prefers-reduced-motion:reduce){.mj-spin,.mj-ripple,.mj-rise,.mj-track,.mj-cta{animation:none}}
+@media (prefers-reduced-motion:reduce){.mj-spin,.mj-bolt,.mj-twinkle,.mj-ripple,.mj-rise,.mj-track,.mj-cta{animation:none}}
 </style>
 <style>[hidden]{display:none!important}#avatar:focus-visible{outline:3px solid #FFD60A;outline-offset:6px}</style>
 </head>
@@ -64,6 +69,13 @@ a{color:#FFD60A}a:hover{color:#FFFFFF}
 <div aria-hidden="true" style="position: absolute; inset: -12px; border-radius: 30px; border: 2px solid #FFD60A"></div>
 <button type="button" id="avatar" aria-label="Ampliar a arte do disco de Mestre Jota" style="position: absolute; inset: 0; width: 100%; height: 100%; padding: 0; border: 0; border-radius: 20px; overflow: hidden; background: #0B0B0F; box-shadow: 0 26px 60px rgba(0,0,0,0.55); cursor: zoom-in">
 <img src="vitrola.jpg" alt="" style="display: block; width: 100%; height: 100%; object-fit: cover">
+<img class="mj-twinkle" src="vitrola.jpg" alt="" style="position: absolute; inset: 0; display: block; width: 100%; height: 100%; object-fit: cover; filter: brightness(1.7) saturate(1.25); -webkit-mask-image: radial-gradient(ellipse 48% 13% at 36% 13%, #000000 55%, rgba(0,0,0,0) 100%); mask-image: radial-gradient(ellipse 48% 13% at 36% 13%, #000000 55%, rgba(0,0,0,0) 100%)">
+<span class="mj-vinyl" style="position: absolute; inset: 0; display: block; mix-blend-mode: screen">
+<span style="position: absolute; left: -60.6%; top: -18.07%; width: 178%; aspect-ratio: 1 / 1; display: block; transform: scaleY(0.672)">
+<span class="mj-spin" style="display: block; width: 100%; height: 100%; border-radius: 50%; background: conic-gradient(rgba(255,255,255,0) 0deg, rgba(255,255,255,0.4) 10deg, rgba(255,255,255,0) 24deg, rgba(255,255,255,0) 96deg, rgba(255,236,170,0.28) 108deg, rgba(255,255,255,0) 122deg, rgba(255,255,255,0) 178deg, rgba(255,255,255,0.36) 190deg, rgba(255,255,255,0) 206deg, rgba(255,255,255,0) 262deg, rgba(190,210,255,0.26) 276deg, rgba(255,255,255,0) 290deg, rgba(255,255,255,0) 360deg)"></span>
+</span>
+</span>
+<img class="mj-bolt" src="vitrola.jpg" alt="" style="position: absolute; inset: 0; display: block; width: 100%; height: 100%; object-fit: cover; filter: brightness(1.9) saturate(1.3); -webkit-mask-image: radial-gradient(ellipse 34% 13% at 42% 71%, #000000 35%, rgba(0,0,0,0) 100%), radial-gradient(ellipse 17% 20% at 66% 52%, #000000 35%, rgba(0,0,0,0) 100%); mask-image: radial-gradient(ellipse 34% 13% at 42% 71%, #000000 35%, rgba(0,0,0,0) 100%), radial-gradient(ellipse 17% 20% at 66% 52%, #000000 35%, rgba(0,0,0,0) 100%)">
 <span style="position: absolute; left: 4.45%; top: 36.328%; width: 47.906%; display: block">
 <span style="display: block; width: 100%; aspect-ratio: 1 / 1; transform-origin: 50% 0; transform: scaleY(0.672)">
 <img class="mj-spin" src="rotulo.jpg" alt="" style="display: block; width: 100%; height: 100%; border-radius: 50%; -webkit-mask-image: radial-gradient(circle closest-side, #000000 95%, rgba(0,0,0,0) 100%); mask-image: radial-gradient(circle closest-side, #000000 95%, rgba(0,0,0,0) 100%)">
