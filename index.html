@@ -22,7 +22,12 @@ a{color:#FFD60A}a:hover{color:#FFFFFF}
 @keyframes mj-pulse{0%,100%{box-shadow:7px 7px 0 #E10600}50%{box-shadow:7px 7px 0 #E10600,0 0 0 12px rgba(255,214,10,.22)}}
 .mj-ripple{animation:mj-ripple 3.2s ease-out infinite}
 @keyframes mj-spin{to{transform:rotate(360deg)}}
-.mj-spin{animation:mj-spin 6s linear infinite}
+.mj-spin{animation:mj-spin 4.5s linear infinite}
+@keyframes mj-spark{0%,100%{opacity:0;transform:scale(.35)}10%{opacity:1;transform:scale(1)}22%{opacity:.25;transform:scale(1.12)}30%{opacity:1;transform:scale(.9)}48%{opacity:0;transform:scale(1.35)}}
+@keyframes mj-glow{0%,100%{opacity:.55}40%{opacity:1}60%{opacity:.4}80%{opacity:.9}}
+.mj-spark{transform-box:view-box;transform-origin:165px 166px;animation:mj-spark 1.05s linear infinite}
+.mj-spark-b{animation-duration:.8s;animation-delay:.37s}
+.mj-glow{animation:mj-glow .6s linear infinite}
 .mj-rise{animation:mj-rise .7s ease-out both}
 .mj-track{animation:mj-marquee 26s linear infinite}
 .mj-cta{animation:mj-pulse 2.4s ease-in-out infinite;transition:transform .15s ease}
@@ -30,7 +35,7 @@ a{color:#FFD60A}a:hover{color:#FFFFFF}
 .mj-link{transition:transform .15s ease,box-shadow .15s ease}
 .mj-link:hover{transform:translate(-4px,-4px);box-shadow:8px 8px 0 #FFD60A}
 .mj-link:focus-visible,.mj-cta:focus-visible{outline:3px solid #FFFFFF;outline-offset:4px}
-@media (prefers-reduced-motion:reduce){.mj-spin,.mj-ripple,.mj-rise,.mj-track,.mj-cta{animation:none}}
+@media (prefers-reduced-motion:reduce){.mj-spin,.mj-spark,.mj-glow,.mj-ripple,.mj-rise,.mj-track,.mj-cta{animation:none}}
 </style>
 <style>[hidden]{display:none!important}#avatar:focus-visible{outline:3px solid #FFD60A;outline-offset:6px}</style>
 </head>
@@ -47,9 +52,9 @@ a{color:#FFD60A}a:hover{color:#FFFFFF}
 <svg id="ico-off" aria-hidden="true" viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#0B0B0F" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.5 H7.5 L12.5 5.5 V18.5 L7.5 14.5 H4 Z" fill="#0B0B0F"></path><path d="M16.5 9.5 L21.5 14.5 M21.5 9.5 L16.5 14.5"></path></svg>
 </button>
 
-<div aria-hidden="true" style="position: absolute; top: 0; left: 0; right: 0; height: 640px; background: #0B0B0F">
-<img src="favela.jpg" alt="" style="display: block; width: 100%; height: 100%; object-fit: cover; object-position: center 70%">
-<div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(11,11,15,0.3) 0%, rgba(58,13,135,0.5) 55%, #3A0D87 100%)"></div>
+<div aria-hidden="true" style="position: absolute; top: 0; left: 0; right: 0; height: 430px; background: #0B0B0F">
+<img src="favela.jpg" alt="" style="display: block; width: 100%; height: 100%; object-fit: cover; object-position: 82% 78%; filter: brightness(1.4) saturate(1.2)">
+<div style="position: absolute; left: 0; right: 0; bottom: 0; height: 40%; background: linear-gradient(180deg, rgba(58,13,135,0) 0%, #3A0D87 100%)"></div>
 </div>
 
 <header class="mj-rise" style="position: relative; max-width: 620px; margin: 0 auto; padding: 40px 20px 0; display: flex; flex-direction: column; align-items: center; text-align: center">
@@ -59,14 +64,52 @@ a{color:#FFD60A}a:hover{color:#FFFFFF}
 <span>Página oficial</span>
 </div>
 
-<div style="position: relative; width: min(340px, 82vw); aspect-ratio: 1 / 1; margin-top: 48px">
+<div style="position: relative; width: min(340px, 80vw); aspect-ratio: 1 / 1; margin-top: 160px">
 <div class="mj-ripple" aria-hidden="true" style="position: absolute; inset: -12px; border-radius: 50%; border: 2px solid #FFD60A"></div>
 <div aria-hidden="true" style="position: absolute; inset: -12px; border-radius: 50%; border: 2px solid #FFD60A"></div>
 <button type="button" id="avatar" aria-label="Ampliar a arte do disco de Mestre Jota" style="position: absolute; inset: 0; width: 100%; height: 100%; padding: 0; border: 0; border-radius: 50%; background: none; cursor: zoom-in">
-<span class="mj-spin" style="position: absolute; inset: 0; display: block; border-radius: 50%; background: repeating-radial-gradient(circle at center, #0B0B0F 0px, #0B0B0F 2px, #1F1F27 3px); box-shadow: 0 26px 60px rgba(0,0,0,0.55), 0 0 0 3px #0B0B0F">
-<img src="rotulo.jpg" alt="" style="position: absolute; top: 23%; left: 23%; width: 54%; height: 54%; box-sizing: border-box; border-radius: 50%; object-fit: cover; border: 3px solid #FFD60A">
+<span class="mj-spin" style="position: absolute; inset: 0; display: block; border-radius: 50%; background: radial-gradient(circle closest-side, #08080B 0%, #08080B 62%, rgba(0,0,0,0) 62.4%, rgba(0,0,0,0) 72.6%, #040406 73%, #040406 73.9%, rgba(0,0,0,0) 74.3%, rgba(0,0,0,0) 84.6%, #040406 85%, #040406 85.9%, rgba(0,0,0,0) 86.3%, rgba(0,0,0,0) 95.4%, #0D0D12 96%, #17171D 99%, #050507 100%), repeating-radial-gradient(circle closest-side, #101015 0%, #101015 0.45%, #2A2A33 0.85%, #101015 1.25%); box-shadow: 0 28px 60px rgba(0,0,0,0.6), 0 0 0 2px #000000">
+<img src="rotulo.jpg" alt="" style="position: absolute; top: 23%; left: 23%; width: 54%; height: 54%; box-sizing: border-box; border-radius: 50%; object-fit: cover; border: 2px solid #C9A227; box-shadow: 0 0 0 5px #0B0B0F, 0 0 0 6px rgba(255,255,255,0.12)">
+<span style="position: absolute; top: calc(50% - 4px); left: calc(50% - 4px); width: 8px; height: 8px; display: block; border-radius: 50%; background: #B9BCC2; box-shadow: 0 0 0 1.5px #0B0B0F"></span>
 </span>
-<span aria-hidden="true" style="position: absolute; inset: 0; display: block; border-radius: 50%; pointer-events: none; background: conic-gradient(from 20deg, rgba(255,255,255,0) 0deg, rgba(255,255,255,0.17) 28deg, rgba(255,255,255,0) 56deg, rgba(255,255,255,0) 180deg, rgba(255,255,255,0.12) 208deg, rgba(255,255,255,0) 236deg, rgba(255,255,255,0) 360deg)"></span>
+<span aria-hidden="true" style="position: absolute; inset: 0; display: block; border-radius: 50%; pointer-events: none; background: conic-gradient(from 10deg, rgba(255,255,255,0) 0deg, rgba(255,255,255,0.05) 22deg, rgba(255,255,255,0.3) 40deg, rgba(255,255,255,0.05) 58deg, rgba(255,255,255,0) 80deg, rgba(255,255,255,0) 118deg, rgba(255,255,255,0.1) 132deg, rgba(255,255,255,0) 146deg, rgba(255,255,255,0) 180deg, rgba(255,255,255,0.05) 202deg, rgba(255,255,255,0.26) 220deg, rgba(255,255,255,0.05) 238deg, rgba(255,255,255,0) 260deg, rgba(255,255,255,0) 298deg, rgba(255,255,255,0.1) 312deg, rgba(255,255,255,0) 326deg, rgba(255,255,255,0) 360deg); -webkit-mask-image: radial-gradient(circle closest-side, rgba(0,0,0,0) 61%, #000000 63%); mask-image: radial-gradient(circle closest-side, rgba(0,0,0,0) 61%, #000000 63%)"></span>
+<svg aria-hidden="true" viewBox="0 0 240 240" style="position: absolute; top: -10%; left: 0; width: 120%; height: 120%; pointer-events: none; overflow: visible">
+<defs>
+<filter id="mj-glow" x="-200%" y="-200%" width="500%" height="500%"><feGaussianBlur stdDeviation="3.5"></feGaussianBlur></filter>
+</defs>
+<circle cx="222" cy="36" r="19" fill="#17171D" stroke="#000000" stroke-width="1.5"></circle>
+<path d="M240 4 L228 26" stroke="#6E727A" stroke-width="13" stroke-linecap="round"></path>
+<path d="M222 36 L187 133 L170 156" fill="none" stroke="#0B0B0F" stroke-width="8.5" stroke-linecap="round" stroke-linejoin="round"></path>
+<path d="M222 36 L187 133 L170 156" fill="none" stroke="#C9CCD2" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"></path>
+<path d="M220 36 L186 131" fill="none" stroke="#FFFFFF" stroke-width="1.4" stroke-linecap="round" opacity="0.7"></path>
+<circle cx="222" cy="36" r="11" fill="#D5D8DD" stroke="#0B0B0F" stroke-width="1.5"></circle>
+<circle cx="222" cy="36" r="4" fill="#6E727A"></circle>
+<g transform="translate(171 155) rotate(53)">
+<rect x="-15" y="-8" width="30" height="16" rx="3" fill="#E6E8EC" stroke="#0B0B0F" stroke-width="1.5"></rect>
+<rect x="-9" y="-4" width="5" height="8" rx="1" fill="#6E727A"></rect>
+<rect x="-1" y="-4" width="5" height="8" rx="1" fill="#6E727A"></rect>
+<path d="M11 8 L20 15" stroke="#C9CCD2" stroke-width="2.5" stroke-linecap="round"></path>
+</g>
+<circle class="mj-glow" cx="165" cy="166" r="9" fill="#FFD60A" filter="url(#mj-glow)"></circle>
+<circle cx="165" cy="166" r="2.2" fill="#FFFFFF"></circle>
+<g class="mj-spark mj-spark-a" stroke-linecap="round" fill="none">
+<path d="M165 166 L149 158" stroke="#FFD60A" stroke-width="1.8"></path>
+<path d="M165 166 L154 181" stroke="#FFFFFF" stroke-width="1.4"></path>
+<path d="M165 166 L178 180" stroke="#FFD60A" stroke-width="1.6"></path>
+<path d="M165 166 L182 161" stroke="#FFFFFF" stroke-width="1.2"></path>
+<circle cx="145" cy="155" r="1.4" fill="#FFD60A" stroke="none"></circle>
+<circle cx="181" cy="184" r="1.2" fill="#FFFFFF" stroke="none"></circle>
+</g>
+<g class="mj-spark mj-spark-b" stroke-linecap="round" fill="none">
+<path d="M165 166 L143 170" stroke="#FFFFFF" stroke-width="1.3"></path>
+<path d="M165 166 L160 187" stroke="#FFD60A" stroke-width="1.7"></path>
+<path d="M165 166 L186 172" stroke="#FFD60A" stroke-width="1.5"></path>
+<path d="M165 166 L158 149" stroke="#FFB300" stroke-width="1.3"></path>
+<circle cx="139" cy="171" r="1.3" fill="#FFFFFF" stroke="none"></circle>
+<circle cx="159" cy="191" r="1.5" fill="#FFD60A" stroke="none"></circle>
+<circle cx="190" cy="174" r="1.1" fill="#FFB300" stroke="none"></circle>
+</g>
+</svg>
 </button>
 </div>
 
